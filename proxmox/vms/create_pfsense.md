@@ -70,3 +70,11 @@ After creation, by clicking in the machine, it is possible to validate all the a
 
 Additionally, the PCI passthrough NIC devices should be added by resorting to the [documentation](../enable_iommu_and_passthrough.md#finalizing-configuration).
 
+The VM can be started and the default installation can go through.
+
+## After Installation
+
+After the basis OS installation the CD-ROM disk drive with the ISO can be removed.
+
+
+

@@ -112,5 +112,5 @@ Everything is working as expected if the device is using the driver `vfio-pci`. 
 
 ## Finalizing Configuration
 
-Now the device can be added with: WIP WIP WIP
+Now the device can be added by clicking the VM, `Hardware`, `Add`, `PCI Device`, the device can be chosen from the `Raw Device` list and enabling `All functions`, as well as `PCI-Express`.
 
