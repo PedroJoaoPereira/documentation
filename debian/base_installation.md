@@ -9,7 +9,7 @@ Assuming only four partitions for UEFI, boot, host and swap. The OS will be inst
 The disk will contain a GPT partition table with four partitions:
 - `/dev/nvme0n1p1` size _512MB_ - `EFI System Partition` mounted at `/boot/efi`
 - `/dev/nvme0n1p2` size _512MB_ - `Boot Partition` mounted at `/boot`
-- `/dev/nvme0n1p3` size _16GB_ - `Root Partition` mounted at `/`
+- `/dev/nvme0n1p3` size _8GB_ - `Root Partition` mounted at `/`
 - `/dev/nvme0n1p4` size _4GB_ - `Swap Partition` mounted at `swap`
 
 
