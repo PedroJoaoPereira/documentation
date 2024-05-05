@@ -42,7 +42,7 @@ Restart the ssh service with or reboot:
 systemctl restart ssh
 ```
 
-### Create Secure Connectio
+### Create Secure Connection
 
 Create SSH keys to be copied over to the new system (remote) and the root login can be disabled, by executing the following on the machine that will connect to the remote system:
 
