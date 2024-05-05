@@ -82,6 +82,22 @@ systemctl restart ssh
 Update the sources file with the appropriate stable repositories and update / upgrade the system:
 
 ```bash
+# update fstab
+cat > /etc/fstab << EOF
+# nvme0n1p1 - /boot/efi - ESP
+UUID=0F59-70E6                                  /boot/efi               vfat        umask=0077 0 1
+# nvme0n1p2 - /boot - Boot
+UUID=40f3942c-f7ac-4f67-93c8-87a3d0fd3ce3       /boot                   ext4        discard,noatime 0 2
+
+# nvme0n1p3 - swap
+UUID=d3993e8a-9768-400e-9ce3-9a2db0300a34       none                    swap        sw 0 0
+# nvme0n1p4 - / - Root
+UUID=3c4a426c-43d3-44c0-b2ad-e25673bbd319       /                       ext4        discard,noatime,errors=remount-ro 0 1
+
+# ---
+
+EOF
+
 # update sources files
 cat > /etc/apt/sources.list << EOF
 # default debian 12 bookworm repositories
