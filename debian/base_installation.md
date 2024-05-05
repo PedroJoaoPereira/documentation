@@ -1,4 +1,4 @@
-# Minimal Debian Installation
+# Debian Installation
 
 This page documents how to install base Debian OS with UEFI just for personal notes and future reference.
 

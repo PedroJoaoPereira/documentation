@@ -2,5 +2,6 @@
 
 Personal project used to document all kinds of topics regarding Unix based systems
 
-* [Debian minimal installation](./debian/minimal/base_installation.md)
+* [Debian base installation](./debian/base_installation.md)
+* [Proxmox base installation](./proxmox/base_installation.md)
 
