@@ -9,9 +9,8 @@ Assuming only four partitions for UEFI, boot, host and swap. The OS will be inst
 The disk will contain a GPT partition table with four partitions:
 - `/dev/nvme0n1p1` size _512MB_ - `EFI System Partition` mounted at `/boot/efi`
 - `/dev/nvme0n1p2` size _512MB_ - `Boot Partition` mounted at `/boot`
-- `/dev/nvme0n1p3` size _8GB_ - `Root Partition` mounted at `/`
-- `/dev/nvme0n1p4` size _4GB_ - `Swap Partition` mounted at `swap`
-
+- `/dev/nvme0n1p3` size _4GB_ - `Swap Partition` mounted at `swap`
+- `/dev/nvme0n1p4` size _8GB_ - `Root Partition` mounted at `/`
 
 ## Installation
 
@@ -21,7 +20,7 @@ The hostname for this machine will be `proxmox-server` and its domain `home-netw
 
 While configuring the package manager choose the mirror option closer to the system and select only the essentials repositories by declining all extra prompted repositories / branches. When choosing the software to be installed also allow the backported software into the repositories, disable any desktop environment selected by default and enable SSH server - only the system essentials and ssh server should be selected.
 
-### Create Secure Connection
+### Create Insecure Connection
 
 In order to work remotely with ssh while using a root account the ssh daemon should be configure to allow root login connections- this is dangerous but it will be enabled during a short period of time while configuring connection keys. To enable the root ssh logind edit the file:
 
@@ -37,11 +36,13 @@ PermitRootLogin yes
 ...
 ```
 
-Restart the ssh service with:
+Restart the ssh service with or reboot:
 
 ```bash
 systemctl restart ssh
 ```
+
+### Create Secure Connectio
 
 Create SSH keys to be copied over to the new system (remote) and the root login can be disabled, by executing the following on the machine that will connect to the remote system:
 
@@ -70,7 +71,7 @@ Host 192.168.1.20
   IdentityFile      ~/.ssh/id_personal
 ```
 
-Disable the root login option by reverting the `PermitRootLogin yes` at `nano /etc/ssh/sshd_config` and restart the ssh service with:
+Disable the root login option by reverting the `PermitRootLogin yes` at `nano /etc/ssh/sshd_config` and restart the ssh service with or reboot:
 
 ```bash
 systemctl restart ssh
