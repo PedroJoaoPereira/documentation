@@ -53,3 +53,19 @@ Cleanup after install with the useful scripts - [link](https://tteck.github.io/P
 bash -c "$(wget -qLO - https://github.com/tteck/Proxmox/raw/main/misc/post-pve-install.sh)"
 ```
 
+## Maintenance
+
+To update the system it is possible to use the shell option for the `proxmox-server` node and from inside the server system run the following bash commands:
+
+```bash
+apt update && apt upgrade -y
+update-initramfs -tuck all && update-grub
+reboot
+```
+
+After the system has rebooted and if a new kernel was installed - assuming that everything is still working as expected - the old kernel can be cleaned with the useful script:
+
+```bash
+bash -c "$(wget -qLO - https://github.com/tteck/Proxmox/raw/main/misc/kernel-clean.sh)"
+```
+
