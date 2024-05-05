@@ -60,7 +60,14 @@ df -h
 
 ## Setup Proxmox Storage
 
-Add the `ZFS` filesystem to `/dev/nvme0n1p5` by clicking the `proxmox-server` node, the option `Disks`, `ZFS`, `Create: ZFS` with the name `aa-local-data-zfs`.
+Add the `ZFS` filesystem to `/dev/nvme0n1p5` by clicking the `proxmox-server` node, the option `Disks`, `ZFS`, `Create: ZFS` with the name `aa-local-data-zfs`. After setting this storage and using Proxmox shell it is possible to disable atime records to get a bit more performance of the zfs pool by running the command:
+
+```bash
+zfs set atime=off aa-local-data-zfs
+zfs get atime
+```
+
+And the zfs pool should now be listed as atime value off.
 
 Now with the disks properly partitioned and setup, add the storages for all disks by clicking the `Datacenter` option on the tree view, `Storage` in the datacenter options and adding:
 

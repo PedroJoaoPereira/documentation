@@ -63,12 +63,54 @@ dmesg | grep -e DMAR -e IOMMU -e AMD-Vi
 
 ## Host Configuration
 
-In order to passthrough a PCI device, the device needs to be available and not in used by the host. Running the following command allows the display of all the devices, driver and kernel modules in use. If the desired device does not have a vfio driver it means it is in use by the host and can never be passthrough:
+In order to passthrough a PCI device, the device needs to be available and not in use by the host. Running the following command allows to display all the devices, driver and kernel modules in use. If the desired device does not have a vfio driver it means it is in use by the host and can never be passthrough:
 
 ```bash
 lspci -nnk
 ```
 
-WIP WIP WIP
-https://pve.proxmox.com/wiki/PCI(e)_Passthrough
+Using the above command, the desired devices to be passthrough can be noted. Updating the initramfs hook scripts it is possible to force a vfio driver to load on the device by creating a script, however the device path needs to be found by its Id with:
+
+```bash
+find /sys/devices/pci* | grep 0c:00.0 | grep driver_override
+```
+
+Being `0c:00.0` the device ID listed by `lspci -nnk`, with this the script to update initramfs with can be created:
+
+```bash
+cat > /etc/initramfs-tools/scripts/init-top/bind_vfio.sh << EOF
+#!/bin/sh -e
+
+# force each of the passthrough devices to use vfio driver
+echo "vfio-pci"  > /sys/devices/pci0000:00/0000:00:03.2/0000:0c:00.0/driver_override
+echo "vfio-pci"  > /sys/devices/pci0000:00/0000:00:03.2/0000:0c:00.1/driver_override
+
+# load driver into devices
+modprobe -i vfio-pci
+
+EOF
+
+# give root permissions to script and make it executable
+chmod 755 /etc/initramfs-tools/scripts/init-top/bind_vfio.sh
+chown root:root /etc/initramfs-tools/scripts/init-top/bind_vfio.sh
+
+# use vfio module on initramfs
+echo "vfio-pci" >> /etc/initramfs-tools/modules
+
+update-initramfs -tuck all && update-grub
+
+reboot
+```
+
+Validation can be done using the device ID and the following command:
+
+```bash
+lspci -s 0c:00.0 -v
+```
+
+Everything is working as expected if the device is using the driver `vfio-pci`. It is possible to read more about this operation [here](https://forum.proxmox.com/threads/pci-passthrough-selection-with-identical-devices.63042/).
+
+## Finalizing Configuration
+
+Now the device can be added with: WIP WIP WIP
 
