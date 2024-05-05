@@ -68,5 +68,5 @@ Network:
 
 After creation, by clicking in the machine, it is possible to validate all the above options and there is the possibility to remove `Use tablet for pointer` to `No` to save a bit on CPU.
 
-Additionally, the PCI passthrough NIC devices should be added by resorting to the [documentation](wip).
+Additionally, the PCI passthrough NIC devices should be added by resorting to the [documentation](../enable_iommu_and_passthrough.md#finalizing-configuration).
 

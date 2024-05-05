@@ -8,4 +8,5 @@ This project is intended for personal use with opinionated decisions of implemen
 * [Proxmox base installation](./proxmox/base_installation.md)
 * [Proxmox storage setup](./proxmox/prepare_disks.md)
 * [Proxmox IOMMU and passthrough](./proxmox/enable_iommu_and_passthrough.md)
+* [Proxmox Pfsense VM](./proxmox/vms/create_pfsense.md)
 
